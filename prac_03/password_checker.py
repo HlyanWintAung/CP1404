@@ -1,0 +1,4 @@
+MIN_LENGTH = 2
+MAX_LENGTH = 6
+IS_SPECIAL_CHARACTER_REQUIRED = False
+SPECIAL_CHARACTERS = "!@#$%^&*()_-=+`~,./'[]<>?{}|\\"
