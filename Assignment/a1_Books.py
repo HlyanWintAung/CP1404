@@ -102,3 +102,34 @@ def save_books(books):
         writer.writerows(books)
 
 
+def get_non_empty_string(prompt):
+    while True:
+        response = input(prompt).strip()
+        if response:
+            return response
+        print("Input can not be blank")
+
+
+def get_positive_int(prompt):
+    while True:
+        try:
+            number = int(input(prompt))
+            if number > 0:
+                return number
+            print("Number must be > 0")
+        except ValueError:
+            print("Invalid input - please enter a valid number")
+
+
+def get_valid_book_number(total_books):
+    while True:
+        try:
+            number = int(input("Enter the number of a book to mark as completed\n>>> "))
+            if 1 <= number <= total_books:
+                return number
+            print("Invalid book number")
+        except ValueError:
+            print("Invalid input - please enter a valid number")
+
+
+main()
