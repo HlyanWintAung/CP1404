@@ -75,9 +75,9 @@ def display_books(books):
 
 
 def add_book(books):
-    title = get_non_empty_string("Title: ")
-    author = get_non_empty_string("Author: ")
-    pages = get_positive_int("Number of Pages: ")
+    title = get_non_enpty("Title: ")
+    author = get_non_enpty("Author: ")
+    pages = get_variable_number("Number of Pages: ")
     books.append([title, author, pages, 'u'])
     print(f"{title} by {author} ({pages} pages) added.")
 
@@ -85,7 +85,7 @@ def add_book(books):
 def complete_book(books):
     display_books(books)
     if not any(book[3] == 'u' for book in books):
-        print("No unread books to mark as completed.")
+        print("No unread books - well done!")
         return
 
     book_number = get_valid_book_number(len(books))
@@ -102,7 +102,7 @@ def save_books(books):
         writer.writerows(books)
 
 
-def get_non_empty_string(prompt):
+def get_non_enpty(prompt):
     while True:
         response = input(prompt).strip()
         if response:
@@ -110,7 +110,7 @@ def get_non_empty_string(prompt):
         print("Input can not be blank")
 
 
-def get_positive_int(prompt):
+def get_variable_number(prompt):
     while True:
         try:
             number = int(input(prompt))
