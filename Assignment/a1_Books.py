@@ -82,3 +82,23 @@ def add_book(books):
     print(f"{title} by {author} ({pages} pages) added.")
 
 
+def complete_book(books):
+    display_books(books)
+    if not any(book[3] == 'u' for book in books):
+        print("No unread books to mark as completed.")
+        return
+
+    book_number = get_valid_book_number(len(books))
+    if books[book_number - 1][3] == 'u':
+        books[book_number - 1][3] = 'c'
+        print(f"{books[book_number - 1][0]} by {books[book_number - 1][1]} completed!")
+    else:
+        print("That book is already completed")
+
+
+def save_books(books):
+    with open(FILENAME, 'w') as file:
+        writer = csv.writer(file)
+        writer.writerows(books)
+
+
