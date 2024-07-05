@@ -74,3 +74,11 @@ def display_books(books):
         print(f"You still need to read {total_pages} pages in {unread_books} books.")
 
 
+def add_book(books):
+    title = get_non_empty_string("Title: ")
+    author = get_non_empty_string("Author: ")
+    pages = get_positive_int("Number of Pages: ")
+    books.append([title, author, pages, 'u'])
+    print(f"{title} by {author} ({pages} pages) added.")
+
+
