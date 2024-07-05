@@ -39,3 +39,16 @@ def main():
             print("Invalid menu choice")
 
 
+def load_books():
+    books = []
+    try:
+        with open(FILENAME, 'r') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                row[2] = int(row[2])
+                books.append(row)
+    except FileNotFoundError:
+        print(f"File {FILENAME} not found. Starting with an empty list.")
+    return books
+
+
