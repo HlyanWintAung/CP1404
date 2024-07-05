@@ -20,7 +20,7 @@ Q - Quit
 def main():
     books = load_books()
     print("Books to Read 1.0 by Hlyan Wint Aung")
-    print(f"{len(books)} books loaded.")
+    print(f"{len(books)} books loaded.\n")
 
     while True:
         choice = input(MENU).strip().lower()
@@ -36,7 +36,7 @@ def main():
             print("Books saved to books.csv\n\"So many books, so little time. Frank Zappa\"")
             break
         else:
-            print("Invalid menu choice")
+            print("Invalid menu choice\n")
 
 
 def load_books():
@@ -45,16 +45,17 @@ def load_books():
         with open(FILENAME, 'r') as file:
             reader = csv.reader(file)
             for row in reader:
-                row[2] = int(row[2])
-                books.append(row)
+                if len(row) == 4:
+                    title, author, pages, status = row
+                    books.append([title, author, int(pages), status])
     except FileNotFoundError:
-        print(f"File {FILENAME} not found. Starting with an empty list.")
+        print(f"File {FILENAME} not found. Starting with an empty list.\n")
     return books
 
 
 def display_books(books):
     if not books:
-        print("No books to display.")
+        print("No books to display.\n")
     else:
         books.sort(key=lambda book: (book[1], book[0]))
         total_pages = 0
@@ -71,43 +72,43 @@ def display_books(books):
 
             print(f"{status}{i + 1}. {book[0]:<30} by {book[1]:<20} {book[2]} pages")
 
-        print(f"You still need to read {total_pages} pages in {unread_books} books.")
+        print(f"\nYou still need to read {total_pages} pages in {unread_books} books.\n")
 
 
 def add_book(books):
-    title = get_non_enpty("Title: ")
-    author = get_non_enpty("Author: ")
+    title = get_non_empty("Title: ")
+    author = get_non_empty("Author: ")
     pages = get_variable_number("Number of Pages: ")
     books.append([title, author, pages, 'u'])
-    print(f"{title} by {author} ({pages} pages) added.")
+    print(f"{title} by {author} ({pages} pages) added.\n")
 
 
 def complete_book(books):
     display_books(books)
     if not any(book[3] == 'u' for book in books):
-        print("No unread books - well done!")
+        print("No unread books - well done!\n")
         return
 
     book_number = get_valid_book_number(len(books))
     if books[book_number - 1][3] == 'u':
         books[book_number - 1][3] = 'c'
-        print(f"{books[book_number - 1][0]} by {books[book_number - 1][1]} completed!")
+        print(f"{books[book_number - 1][0]} by {books[book_number - 1][1]} completed!\n")
     else:
-        print("That book is already completed")
+        print("That book is already completed\n")
 
 
 def save_books(books):
-    with open(FILENAME, 'w') as file:
+    with open(FILENAME, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(books)
 
 
-def get_non_enpty(prompt):
+def get_non_empty(prompt):
     while True:
         response = input(prompt).strip()
         if response:
             return response
-        print("Input can not be blank")
+        print("Input cannot be blank\n")
 
 
 def get_variable_number(prompt):
@@ -116,9 +117,9 @@ def get_variable_number(prompt):
             number = int(input(prompt))
             if number > 0:
                 return number
-            print("Number must be > 0")
+            print("Number must be > 0\n")
         except ValueError:
-            print("Invalid input - please enter a valid number")
+            print("Invalid input - please enter a valid number\n")
 
 
 def get_valid_book_number(total_books):
@@ -127,8 +128,8 @@ def get_valid_book_number(total_books):
             number = int(input("Enter the number of a book to mark as completed\n>>> "))
             if 1 <= number <= total_books:
                 return number
-            print("Invalid book number")
+            print("Invalid book number\n")
         except ValueError:
-            print("Invalid input - please enter a valid number")
+            print("Invalid input - please enter a valid number\n")
 
 main()
