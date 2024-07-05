@@ -52,3 +52,25 @@ def load_books():
     return books
 
 
+def display_books(books):
+    if not books:
+        print("No books to display.")
+    else:
+        books.sort(key=lambda book: (book[1], book[0]))
+        total_pages = 0
+        unread_books = 0
+
+        for i in range(len(books)):
+            book = books[i]
+            if book[3] == 'u':
+                status = '*'
+                total_pages += book[2]
+                unread_books += 1
+            else:
+                status = ' '
+
+            print(f"{status}{i + 1}. {book[0]:<30} by {book[1]:<20} {book[2]} pages")
+
+        print(f"You still need to read {total_pages} pages in {unread_books} books.")
+
+
