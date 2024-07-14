@@ -1,5 +1,6 @@
 from prac_06.car import Car
 
+
 MENU = "Menu:\nd) drive\nr) refuel\nq) quit"
 
 
