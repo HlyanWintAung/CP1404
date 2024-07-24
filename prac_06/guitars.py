@@ -2,7 +2,6 @@ from prac_06.guitar import Guitar
 
 
 def main():
-    """Guitar program, using Guitar class."""
     guitars = []
 
     print("My guitars!")
