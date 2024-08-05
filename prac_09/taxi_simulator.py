@@ -49,7 +49,6 @@ def main():
     print("Taxis are now:")
     display_taxis(taxis)
 
-
 def display_taxis(taxis):
     """Display numbered list of taxis."""
     for i, taxi in enumerate(taxis):
